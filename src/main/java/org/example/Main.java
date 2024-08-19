@@ -1,4 +1,5 @@
-import org.example.App;
+package org.example;
+
 import java.util.Scanner;
 
 public class Main {
