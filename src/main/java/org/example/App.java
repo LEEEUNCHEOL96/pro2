@@ -3,22 +3,15 @@ package org.example;
 import java.util.Scanner;
 
 public class App {
-    Scanner sc;
-    App(Scanner sc){
-        this.sc = sc;
-    }
-    void run (){
-        System.out.println(" == 게시판 앱 == ");
+    private Scanner scanner;
 
-        while (true){
-            System.out.print("명령) " );
-            String commnad = sc.nextLine();
-
-            if (commnad.equals("종료")){
-                break;
-            }
-        }
+    public App(Scanner scanner) {
+        this.scanner = scanner;
     }
 
-
+    public void run() {
+        System.out.println("Enter something:");
+        String input = scanner.nextLine();
+        System.out.println("You entered: " + input);
+    }
 }
