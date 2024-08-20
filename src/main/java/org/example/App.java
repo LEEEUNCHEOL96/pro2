@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class App {
     Scanner sc;
+    List<Article> articleList = new ArrayList<>();
 
     App(Scanner sc) {
         this.sc = sc;
@@ -13,8 +14,6 @@ public class App {
 
     void run() {
         int lastId = 1;
-
-        List<Article> articleList = new ArrayList<>();
 
 
         System.out.println("== 게시판 앱 ==");
@@ -59,13 +58,8 @@ public class App {
                 String value = paramsStr[1];
                 int idx = Integer.parseInt(value);
 
-                Article article = null;
+                Article article = _findById(idx); //중복 코드 저리
 
-                for (int i = 0; i < articleList.size(); i++) {
-                    if (articleList.get(i).getId() == idx) {
-                        article = articleList.get(i);
-                    }
-                }
                 if (article == null) {
                     System.out.printf("%d번 게시물은 존재하지 않습니다.\n", idx);
                 } else {
@@ -83,32 +77,37 @@ public class App {
                 String value = paramsStr[1];
                 int idx = Integer.parseInt(value);
 
-                Article article = null;
+                Article article = _findById(idx); // 중복코드 처리
 
-                for (Article row : articleList) {  //향상된 for문 사용
-                    if (row.getId() == idx) {  // "삭제" 와 같은 공식임
-                        article = row;
-                    }
-                }
                 if (article == null) {
                     System.out.printf("%d번 게시물은 수정되지 않습니다.\n", idx);
                 } else {
-                    System.out.printf("제목(기존) : %s\n",article.getSubject());
-                    // 처음 저장된 제목 불러오기
+                    System.out.printf("제목(기존) : %s\n", article.getSubject());
+
                     System.out.println("제목 : ");
                     String modifySubject = sc.nextLine();
-                    article.setSubject(modifySubject);  // 게터 세터 사용
+                    article.setSubject(modifySubject);
 
-                    System.out.printf("내용(기존) : %s\n",article.getContent());
-                    // 처음 저장된 내용 불러오기
+                    System.out.printf("내용(기존) : %s\n", article.getContent());
+
                     System.out.println("내용 : ");
                     String modifycontent = sc.nextLine();
-                    article.setContent(modifycontent);  // 게터 세터 사용
+                    article.setContent(modifycontent);
 
                     System.out.printf("%d번 게시물이 수정되었습니다.\n", idx);
                 }
 
             }
         }
+    }
+
+    private Article _findById(int id) {
+        for (Article item : articleList) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+
+        return null;
     }
 }
