@@ -91,14 +91,16 @@ public class App {
                     }
                 }
                 if (article == null) {
-                    System.out.printf("%d번 게시물은 수정되었습니다.\n", idx);
+                    System.out.printf("%d번 게시물은 수정되지 않습니다.\n", idx);
                 } else {
                     System.out.printf("제목(기존) : %s\n",article.getSubject());
+                    // 처음 저장된 제목 불러오기
                     System.out.println("제목 : ");
                     String modifySubject = sc.nextLine();
                     article.setSubject(modifySubject);  // 게터 세터 사용
 
-                    System.out.printf("제목(내용) : %s\n",article.getContent());
+                    System.out.printf("내용(기존) : %s\n",article.getContent());
+                    // 처음 저장된 내용 불러오기
                     System.out.println("내용 : ");
                     String modifycontent = sc.nextLine();
                     article.setContent(modifycontent);  // 게터 세터 사용
