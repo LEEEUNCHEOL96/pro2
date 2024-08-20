@@ -22,5 +22,13 @@ public class Article {
     public String getContent () {
         return this.content;
     }
+    public void setSubject(String subject) {
+        this.subject = subject; // 제목 설정
+    }
+    public void setContent(String content) {
+        this.content = content; // 내용 설정
+    }
+
 
 }
+

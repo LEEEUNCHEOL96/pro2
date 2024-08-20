@@ -50,41 +50,61 @@ public class App {
                     System.out.printf("%d, %s, %s\n", article.getId(), article.getSubject(), article.getContent());
 
                 }
-            } else if (command.startsWith("삭제")){
+            } else if (command.startsWith("삭제")) {
 
-                String [] commandList = command.split("\\?",2); //정규표현식으로 \\를 사용해야한다
-
-                String actionCode = commandList[0]; // {"삭제", "=1"} 으로 나뉜것을 actionCode 첫번째에 저장한다.
-
-                String [] paramsStr = commandList[1].split("=",2); // {"id" , "1"} 으로 나뉨
-
+                String[] commandList = command.split("\\?", 2);
+                String actionCode = commandList[0];
+                String[] paramsStr = commandList[1].split("=", 2);
                 String key = paramsStr[0];
-                // 배열의 첫 번째 요소를 key에 저장합니다.
-                // 이 경우 "id"입니다. 이 변수는 파라미터의 키입니다.
-
                 String value = paramsStr[1];
-                // 배열의 두 번째 요소를 value에 저장합니다.
-                // 이 경우 "1"입니다. 이 변수는 파라미터의 값입니다.
-
                 int idx = Integer.parseInt(value);
-                // value 문자열을 정수로 변환하여 idx에 저장합니다.
-
 
                 Article article = null;
 
-                for(int i=0; i < articleList.size(); i++){  // 배열순회
-                    if (articleList.get(i).getId()== idx){  // 현재 인덱스 i의 게시글 ID가 idx와 일치하는 경우
-                        article =articleList.get(i);  // 게시글을 리스트에서 제거합니다.
+                for (int i = 0; i < articleList.size(); i++) {
+                    if (articleList.get(i).getId() == idx) {
+                        article = articleList.get(i);
                     }
                 }
-                if (article==null){  // 예외처리
-                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n",idx);
-                }else {
+                if (article == null) {
+                    System.out.printf("%d번 게시물은 존재하지 않습니다.\n", idx);
+                } else {
                     articleList.remove(article);
-                    System.out.printf("%d번 게시물이 삭제되었습니다.\n",idx);
+                    System.out.printf("%d번 게시물이 삭제되었습니다.\n", idx);
                 }
 
-                System.out.printf("%d번 게시물이 삭제되었습니다.\n",idx);
+
+            } else if (command.startsWith("수정")) {
+
+                String[] commandList = command.split("\\?", 2);
+                String actionCode = commandList[0];
+                String[] paramsStr = commandList[1].split("=", 2);
+                String key = paramsStr[0];
+                String value = paramsStr[1];
+                int idx = Integer.parseInt(value);
+
+                Article article = null;
+
+                for (Article row : articleList) {  //향상된 for문 사용
+                    if (row.getId() == idx) {  // "삭제" 와 같은 공식임
+                        article = row;
+                    }
+                }
+                if (article == null) {
+                    System.out.printf("%d번 게시물은 수정되었습니다.\n", idx);
+                } else {
+                    System.out.printf("제목(기존) : %s\n",article.getSubject());
+                    System.out.println("제목 : ");
+                    String modifySubject = sc.nextLine();
+                    article.setSubject(modifySubject);  // 게터 세터 사용
+
+                    System.out.printf("제목(내용) : %s\n",article.getContent());
+                    System.out.println("내용 : ");
+                    String modifycontent = sc.nextLine();
+                    article.setContent(modifycontent);  // 게터 세터 사용
+
+                    System.out.printf("%d번 게시물이 수정되었습니다.\n", idx);
+                }
 
             }
         }
