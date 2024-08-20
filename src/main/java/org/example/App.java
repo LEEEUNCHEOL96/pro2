@@ -19,15 +19,15 @@ public class App {
         System.out.println("== 게시판 앱 ==");
         while (true) {
             System.out.print("명령) ");
-            String command = sc.nextLine().trim();
+            String command = sc.nextLine().trim(); //trim 은 공백 제거를 위함
 
             if (command.equals("종료")) {
                 break;
             } else if (command.equals("등록")) {
                 System.out.print("제목 : ");
-                String subject = sc.nextLine().trim();
+                String subject = sc.nextLine().trim(); //trim 은 공백 제거를 위함
                 System.out.print("내용 : ");
-                String content = sc.nextLine().trim();
+                String content = sc.nextLine().trim(); //trim 은 공백 제거를 위함
 
 
                 Article article = new Article(lastId, subject, content);
@@ -40,7 +40,7 @@ public class App {
             } else if (command.equals("목록")) {
                 System.out.println("번호 / 제목 / 내용");
                 System.out.println("----------------------");
-                for (int i = articleList.size() -1 ; i >-1 ; i--) {
+                for (int i = articleList.size() -1 ; i >-1 ; i--) { //역으로 출력하기위한 시작점 변경
                     Article article = articleList.get(i);
                     System.out.printf("%d, %s, %s\n", article.getId(), article.getSubject(), article.getContent());
                 }
