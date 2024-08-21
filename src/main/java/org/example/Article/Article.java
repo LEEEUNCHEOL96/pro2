@@ -1,34 +1,27 @@
-package org.example;
+package org.example.Article;
 
 public class Article {
     private int id;
     private String subject;
     private String content;
-
-
-    Article(int id, String subject, String content) {
+    Article (int id, String subject, String content) {
         this.id = id;
         this.subject = subject;
         this.content = content;
     }
-
-
-    public int getId () {
+    int getId () {
         return this.id;
     }
-    public String getSubject () {
+    String getSubject () {
         return this.subject;
     }
-    public String getContent () {
+    String getContent() {
         return this.content;
     }
     public void setSubject(String subject) {
-        this.subject = subject; // 제목 설정
+        this.subject = subject;
     }
     public void setContent(String content) {
-        this.content = content; // 내용 설정
+        this.content = content;
     }
-
-
 }
-
