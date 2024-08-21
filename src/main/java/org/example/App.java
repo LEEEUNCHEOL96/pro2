@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.Article.ArticleController;
-import org.example.system.SystemController;
+import org.example.System.SystemController;
 
 public class App {
     ArticleController articleController;
@@ -18,6 +18,7 @@ public class App {
         while (true) {
             System.out.print("명령) ");
             String command = Container.getSc().nextLine().trim();
+            // 커맨드에 입력한 내용을 actionCode, idx로 분류해서 필드로 저장
             Request request = new Request(command);
 
             if (request.getActionCode().equals("종료")) {
@@ -25,12 +26,16 @@ public class App {
                 break;
             } else if (request.getActionCode().equals("등록")) {
                 articleController.write();
+
             } else if (request.getActionCode().equals("목록")) {
                 articleController.list();
+
             } else if (request.getActionCode().startsWith("삭제")) {
-                articleController.delete(request.getIdx());
+                articleController.delete(request);
+
             } else if (request.getActionCode().startsWith("수정")) {
-                articleController.modify(request.getIdx());
+                articleController.modify(request);
+
             }
         }
     }
