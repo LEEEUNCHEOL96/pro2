@@ -1,8 +1,8 @@
 package org.example.Article;
+
 import org.example.Container;
 import org.example.Request;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleController {
@@ -62,7 +62,7 @@ public class ArticleController {
             return;
         }
 
-        Article article =this.articleService.getFindById(id);
+        Article article = this.articleService.getFindById(id);
 
         if (article == null) {
             System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
@@ -77,7 +77,7 @@ public class ArticleController {
             System.out.print("내용 : ");
             String modifyContent = Container.getSc().nextLine();
 
-            articleService.modify(article,modifySubject,modifyContent);
+            articleService.modify(article, modifySubject, modifyContent);
 
 
             System.out.printf("%d번 게시물이 수정되었습니다.\n", id);
