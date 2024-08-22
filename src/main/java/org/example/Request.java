@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class Request {
     private String actionCode;
-    private int idx;
 
     private Map<String, String> params = new HashMap<>();
 
@@ -29,10 +28,6 @@ public class Request {
 
     public String getActionCode() {
         return actionCode;
-    }
-
-    public int getIdx() {
-        return idx;
     }
 
     public String getParams(String key) {
