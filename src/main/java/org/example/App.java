@@ -16,16 +16,14 @@ public class App {
         articleController = new ArticleController();
         systemController = new SystemController();
 
-        DBConnection.DB_NAME="proj1";
-        DBConnection.DB_PORT=3306;
-        DBConnection.DB_USER="root";
-        DBConnection.DB_PASSWORD="";
+        DBConnection.DB_NAME = "proj1";
+        DBConnection.DB_PORT = 3306;
+        DBConnection.DB_USER = "root";
+        DBConnection.DB_PASSWORD = "";
 
-        DBConnection DBConnection = new DBConnection();
-        DBConnection.connect();
+        Container.getDbConnection().connect();
 
-        List<Map<String,Object>> rs = DBConnection.selectRows("select * from article");
-        System.out.println(rs);
+
     }
 
     public void run() {
