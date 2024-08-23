@@ -1,7 +1,11 @@
 package org.example;
 
 import org.example.Article.ArticleController;
+import org.example.DB.DBConnection;
 import org.example.System.SystemController;
+
+import java.util.List;
+import java.util.Map;
 
 public class App {
     ArticleController articleController;
@@ -11,6 +15,17 @@ public class App {
     App() {
         articleController = new ArticleController();
         systemController = new SystemController();
+
+        DBConnection.DB_NAME="proj1";
+        DBConnection.DB_PORT=3306;
+        DBConnection.DB_USER="root";
+        DBConnection.DB_PASSWORD="";
+
+        DBConnection DBConnection = new DBConnection();
+        DBConnection.connect();
+
+        List<Map<String,Object>> rs = DBConnection.selectRows("select * from article");
+        System.out.println(rs);
     }
 
     public void run() {
