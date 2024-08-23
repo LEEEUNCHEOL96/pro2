@@ -8,16 +8,12 @@ import java.util.Map;
 
 public class ArticleRepository {
     List<Article> articleList = new ArrayList<>();
-    int lastId = 1;
 
+     public int create(String subject, String content){
+         String sql =String.format("insert into article set subject='%s',content='%s'", subject,content);
+         int id =  Container.getDbConnection().insert(sql);
 
-    public int create(String subject, String content){
-        Article article = new Article(lastId, subject, content);
-        articleList.add(article);
-
-        lastId++;
-
-        return article.getId();
+        return id;
     }
 
     public List<Article> findAll() {
@@ -32,7 +28,7 @@ public class ArticleRepository {
         return articleList;
     }
     public Article getFindById(int id) {
-
+        List<Article> articleList = new ArrayList<>();
         for (Article item : articleList) {
             if (item.getId() == id) {
                 return item;
