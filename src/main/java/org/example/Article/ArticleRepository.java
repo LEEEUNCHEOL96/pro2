@@ -1,34 +1,28 @@
 package org.example.Article;
 
 import org.example.Container;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ArticleRepository {
-    List<Article> articleList = new ArrayList<>();
-
-     public int create(String subject, String content){
-         String sql =String.format("insert into article set subject='%s',content='%s'", subject,content);
-         int id =  Container.getDbConnection().insert(sql);
-
+    public int create(String subject, String content) {
+        String sql = String.format("insert into article set subject='%s', content='%s'", subject, content);
+        int id = Container.getDbConnection().insert(sql);
         return id;
     }
 
     public List<Article> findAll() {
         List<Article> articleList = new ArrayList<>();
         List<Map<String, Object>> rows = Container.getDbConnection().selectRows("select * from article");
-        for(Map<String, Object> row : rows){
-           Article article = new Article(row);
-
-           articleList.add(article);
+        for (Map<String, Object> row : rows) {
+            Article article = new Article(row);
+            articleList.add(article);
         }
-
         return articleList;
     }
-    public Article getFindById(int id) {
-        List<Article> articleList = new ArrayList<>();
+    public Article FindById(int id) {
+        List<Article> articleList = this.findAll();
         for (Article item : articleList) {
             if (item.getId() == id) {
                 return item;
@@ -36,9 +30,9 @@ public class ArticleRepository {
         }
         return null;
     }
-
     public void remove(Article article) {
-        articleList.remove(article);
+        String sql = String.format("delete from article where id = %d",article.getId());
+        Container.getDbConnection().delete(sql);
     }
 
     public void modify(Article article, String modifySubject, String modifyContent) {
